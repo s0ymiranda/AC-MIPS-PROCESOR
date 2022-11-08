@@ -18,7 +18,7 @@ void TestBench::print() {
     std::cout << "\nimmGen: " << immGenIn.read();
     std::cout << "\nID_EX1: " << ID_EX1In.read();
     std::cout << "\nID_EX2: " << ID_EX2In.read();
-    std::cout << "\nID_EX3: " << ID_EX3In.read();
+    std::cout << "\nID_EX3(Rd): " << ID_EX3In.read();
     std::cout << "\nID_unidadControl: " << ID_unidadControlIn.read();
     std::cout << "\nID_unidadHazzard: " << ID_unidadHazzardIn.read() << "\n";
     for( int i = 31; i>=0 ; i--)
@@ -43,7 +43,7 @@ void TestBench::test() {
     wait();
     print();
     
-    pcOut.write(2);
+    pcOut.write(1);
     
     insMemOut.write(15485620);
     hazzardOut.write(0);
@@ -55,6 +55,14 @@ void TestBench::test() {
     hazzardOut.write(0);
 
     insMemOut.write(2);
+    wait();
+    wait();
+    print();
+
+    pcOut.write(3);
+    hazzardOut.write(0);
+
+    insMemOut.write(48454465);
     wait();
     wait();
     print();
