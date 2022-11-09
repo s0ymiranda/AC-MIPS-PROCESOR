@@ -19,7 +19,8 @@ class RegisterFile : public sc_module {
 
     private:
 
-        int registers[32];
+        //int registers[32];
+        sc_vector<sc_signal<sc_int<32>>> SC_NAMED(registers, 32);
         void read();
         void write();
 

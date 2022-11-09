@@ -11,7 +11,7 @@ public:
 
 	sc_in<sc_int<32>> pcIn;
 	sc_in<sc_uint<32>> insMemIn;
-    sc_in<bool> hazzardIn;
+    sc_in<bool> hazardIn;
    // sc_in<sc_int<32>> controlFlushIn;  
 
 	sc_out<sc_uint<5>> fileRegister1Out;
@@ -22,7 +22,8 @@ public:
 	sc_out<sc_uint<5>> ID_EX2Out;
 	sc_out<sc_uint<5>> ID_EX3Out;
 	sc_out<sc_uint<5>> ID_unidadControlOut;
-	sc_out<sc_uint<5>> ID_unidadHazzardOut;
+	sc_out<sc_uint<5>> ID_HDUrs1Out;
+  	sc_out<sc_uint<5>> ID_HDUrs2Out;
 
 	SC_CTOR(IF_ID);
 
