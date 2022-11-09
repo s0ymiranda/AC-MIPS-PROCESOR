@@ -12,7 +12,7 @@ void TestBench::print() {
 
     std::cout <<"\n\n\nPc: " << pcOut.read();
     std::cout << "\nID_EX0: " << ID_EX0In.read();
-    std::cout << "\nHazzardOut " << hazzardOut.read();
+    std::cout << "\nHazardOut " << hazardOut.read();
     std::cout << "\nRs1: " << fileRegister1In.read();
     std::cout << "\nRs2: " << fileRegister2In.read();
     std::cout << "\nimmGen: " << immGenIn.read();
@@ -20,16 +20,16 @@ void TestBench::print() {
     std::cout << "\nID_EX2: " << ID_EX2In.read();
     std::cout << "\nID_EX3(Rd): " << ID_EX3In.read();
     std::cout << "\nID_unidadControl: " << ID_unidadControlIn.read();
-    std::cout << "\nID_unidadHazzard: " << ID_unidadHazzardIn.read() << "\n";
-    for( int i = 31; i>=0 ; i--)
-    std::cout << insMemOut.read()[i];
+    std::cout << "\nID_HDUrs1: " << ID_HDUrs1In.read();
+    std::cout << "\nID_HDUrs2: " << ID_HDUrs2In.read() << "\n";
+
 }
 
 void TestBench::test() {
  
 
     pcOut.write(0);
-    hazzardOut.write(0);
+    hazardOut.write(0);
     insMemOut.write(54546166);
     wait();
     wait();
@@ -38,7 +38,7 @@ void TestBench::test() {
     pcOut.write(1);
     
     insMemOut.write(548452);    
-    hazzardOut.write(1);
+    hazardOut.write(1);
     wait();
     wait();
     print();
@@ -46,13 +46,13 @@ void TestBench::test() {
     pcOut.write(1);
     
     insMemOut.write(15485620);
-    hazzardOut.write(0);
+    hazardOut.write(0);
     wait();
     wait();
     print();
 
     pcOut.write(2);
-    hazzardOut.write(0);
+    hazardOut.write(0);
 
     insMemOut.write(2);
     wait();
@@ -60,7 +60,7 @@ void TestBench::test() {
     print();
 
     pcOut.write(3);
-    hazzardOut.write(0);
+    hazardOut.write(0);
 
     insMemOut.write(48454465);
     wait();

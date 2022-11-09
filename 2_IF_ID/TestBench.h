@@ -8,7 +8,7 @@ class TestBench : public sc_module {
     sc_in_clk clk;
     sc_out<sc_int<32>> pcOut;      
     sc_out<sc_uint<32>> insMemOut;
-    sc_out<bool> hazzardOut;
+    sc_out<bool> hazardOut;
 
 	sc_in<sc_uint<5>> fileRegister1In;
 	sc_in<sc_uint<5>> fileRegister2In;
@@ -18,7 +18,9 @@ class TestBench : public sc_module {
 	sc_in<sc_uint<5>> ID_EX2In;
 	sc_in<sc_uint<5>> ID_EX3In;
 	sc_in<sc_uint<5>> ID_unidadControlIn;
-	sc_in<sc_uint<5>> ID_unidadHazzardIn;
+	sc_in<sc_uint<5>> ID_HDUrs1In;
+  sc_in<sc_uint<5>> ID_HDUrs2In;
+
 
     SC_CTOR(TestBench);
 

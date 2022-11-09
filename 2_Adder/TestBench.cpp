@@ -1,7 +1,6 @@
 #include "TestBench.h"
 #include <iostream>
-#include <cstdlib>
-#include <ctime>
+
 
 TestBench::TestBench(sc_module_name moduleName) : sc_module(moduleName){
 
