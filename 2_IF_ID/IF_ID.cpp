@@ -33,7 +33,7 @@ void IF_ID::operation()
 	sc_uint<5> rs1, rs2, rd;
 	sc_int<12> imm;
     
-
+if(hazardIn.read() == 0){
     for (sc_uint<3> i = 0; i < 5; i++)
 		instruction[i] = insMemIn.read()[i];
 
@@ -112,30 +112,17 @@ void IF_ID::operation()
 
 
 
+	fileRegister1Out.write(rs1);
+	fileRegister2Out.write(rs2);
+    ID_EX0Out.write(pcIn.read());
+    ID_unidadControlOut.write(instruction);
+    ID_EX1Out.write(rs1);
+    ID_EX2Out.write(rs2);
+    ID_EX3Out.write(rd);
+    immGenOut.write(imm);
+    ID_HDUrs1Out.write(rs1);
+    ID_HDUrs2Out.write(rs2);
+    
+}
 
-
-    if (hazzardIn.read()==1){
-       	fileRegister1Out.write(0);
-	    fileRegister2Out.write(0);
-        ID_EX0Out.write(0);
-        ID_unidadControlOut.write(0);
-        ID_EX1Out.write(0);
-        ID_EX2Out.write(0);
-        ID_EX3Out.write(0);
-        immGenOut.write(0);
-        ID_unidadHazzardOut.write(0);
-     }else {
-	    fileRegister1Out.write(rs1);
-	    fileRegister2Out.write(rs2);
-        ID_EX0Out.write(pcIn.read());
-        ID_unidadControlOut.write(instruction);
-        ID_EX1Out.write(rs1);
-        ID_EX2Out.write(rs2);
-        ID_EX3Out.write(rd);
-        immGenOut.write(imm);
-        ID_unidadHazzardOut.write(instruction);
-     }
-
-
-	
 }

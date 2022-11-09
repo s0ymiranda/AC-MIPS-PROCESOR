@@ -10,9 +10,10 @@ public:
 	
 
     sc_in<sc_int<32>> s1In;     
-    sc_in<sc_int<32>> s2In;    
+    sc_in<sc_int<32>> s2In; 
+    sc_in<sc_uint<5>> instrucIn;   
    
-    sc_out<sc_uint<2>> resultOut;
+    sc_out<bool> resultOut;
 
 	SC_CTOR(Branch_Condition);
 

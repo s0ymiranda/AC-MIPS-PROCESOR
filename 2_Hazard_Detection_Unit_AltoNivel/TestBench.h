@@ -10,11 +10,14 @@ class TestBench : public sc_module{
 
 	    sc_in_clk clk;
 
-	    sc_out<sc_int<32>> s1Out;
-        sc_out<sc_int<32>> s2Out;
-		sc_out<sc_uint<5>> instrucOut;  
+	    sc_out<sc_uint<5>> IDEXInstrucOut;
+	    sc_out<sc_uint<5>> rs1Out;
+        sc_out<sc_uint<5>> rs2Out;
+        sc_out<sc_uint<5>> IDEXrdOut;
 
-	    sc_in<bool> resultIn;
+        sc_in<bool> pcwriteIn;
+        sc_in<bool> IFIDwriteIn;
+        sc_in<bool> muxControlIn;
 
 	    SC_CTOR(TestBench);
 

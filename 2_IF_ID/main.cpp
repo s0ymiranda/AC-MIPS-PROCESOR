@@ -15,11 +15,11 @@ int sc_main(int argc, char *argv[])
     sc_signal<bool> hazzardSg;
 	sc_signal<sc_uint<5>> fileRegister1Sg, fileRegister2Sg, ID_EX1Sg, ID_EX2Sg, ID_EX3Sg;
 	sc_signal<sc_int<12>> immGenSg;
-	sc_signal<sc_uint<5>> ID_UnidadHazzardSg, ID_UnidadControlSg;
+	sc_signal<sc_uint<5>> ID_HDUrs1Sg, ID_HDUrs2Sg, ID_UnidadControlSg;
 
 	if_id.pcIn(pcSg);
 	if_id.insMemIn(insMemSg);
-    if_id.hazzardIn(hazzardSg);
+    if_id.hazardIn(hazzardSg);
 	if_id.fileRegister1Out(fileRegister1Sg);
 	if_id.fileRegister2Out(fileRegister2Sg);
 	if_id.immGenOut(immGenSg);
@@ -28,11 +28,12 @@ int sc_main(int argc, char *argv[])
     if_id.ID_EX2Out(ID_EX2Sg);
     if_id.ID_EX3Out(ID_EX3Sg);
 	if_id.ID_unidadControlOut(ID_UnidadControlSg);
-    if_id.ID_unidadHazzardOut(ID_UnidadHazzardSg);
+    if_id.ID_HDUrs1Out(ID_HDUrs1Sg);
+	if_id.ID_HDUrs2Out(ID_HDUrs2Sg);
 	
 	tb.pcOut(pcSg);
 	tb.insMemOut(insMemSg);
-    tb.hazzardOut(hazzardSg);
+    tb.hazardOut(hazzardSg);
 	tb.fileRegister1In(fileRegister1Sg);
 	tb.fileRegister2In(fileRegister2Sg);
 	tb.immGenIn(immGenSg);
@@ -41,7 +42,9 @@ int sc_main(int argc, char *argv[])
     tb.ID_EX2In(ID_EX2Sg);
     tb.ID_EX3In(ID_EX3Sg);
 	tb.ID_unidadControlIn(ID_UnidadControlSg);
-	tb.ID_unidadHazzardIn(ID_UnidadHazzardSg);
+	tb.ID_HDUrs1In(ID_HDUrs1Sg);
+	tb.ID_HDUrs2In(ID_HDUrs2Sg);
+
 
 	tb.clk(clock);
 	if_id.clk(clock);
