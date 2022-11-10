@@ -21,12 +21,32 @@ void TestBench :: print() {
   cout << rs1_registerIn.read() << "               ";
   cout << rs2_registerIn.read() << "             ";
   cout << target_registerIn.read() << "\n";
-  
+  cout<< "\nWrite enable seniales de control: " << HazardOut.read();
+  cout << "\nMemWrite: " <<  Mem_MemWriteIn.read();
+  cout << "\nMemRead: " <<  Mem_MemReadIn.read();
+  cout << "\nWBMux: " << Wb_MemtoRegIn.read();
+  cout << "\nRegWrite: " <<   Wb_RegWriteIn.read();
 }
 void TestBench :: test() {
 
 cout << "Time rs1Out rs2Out imm_genOut rs1_registerOut rs2_registerOut target_registerOut rs1In rs2In rs1_registerIn rs2_registerIn target_registerIn\n";
 cout << "--------------------------------------------------------------------------------------------------------------------------------------------\n";
+
+    Ex_ALUOut.write(1515415);
+    rs1Out.write(1);
+    rs2Out.write(0);
+    imm_genOut.write(1);
+    rs1_registerOut.write(0);
+    rs2_registerOut.write(1);
+    target_registerOut.write(0);
+    HazardOut.write(1);
+    Mem_MemWriteOut.write(0);
+    Mem_MemReadOut.write(0);
+    Wb_MemtoRegOut.write(1);
+    Wb_RegWriteOut.write(1);
+    wait();
+    wait();
+    print();
 
     rs1Out.write(1);
     rs2Out.write(0);
@@ -34,7 +54,18 @@ cout << "-----------------------------------------------------------------------
     rs1_registerOut.write(0);
     rs2_registerOut.write(1);
     target_registerOut.write(0);
+    HazardOut.write(0);
+    Mem_MemWriteOut.write(0);
+    Mem_MemReadOut.write(0);
+    Wb_MemtoRegOut.write(1);
+    Wb_RegWriteOut.write(1);
+    Ex_ALUOut.write(1515415);
+    wait();
     wait();
     print();
+
+
+
+
   sc_stop();
 }

@@ -39,118 +39,127 @@ void Control_Unit::operation()
 
 	if (InstrucIn.read() == 0)
 	{
-	    Mem_MemWriteOut.write(1); 
-        Mem_MemReadOut.write(1);
-	    Wb_MemtoRegOut.write(0);
-        Wb_RegWriteOut.write(0);
+	    Mem_MemWriteOut.write(0); 
+        Mem_MemReadOut.write(0);
+	    Wb_MemtoRegOut.write(1);
+        Wb_RegWriteOut.write(1);
 	}
 	if (InstrucIn.read() == 1)
 	{
-	    Mem_MemWriteOut.write(1); 
-        Mem_MemReadOut.write(1);
-	    Wb_MemtoRegOut.write(0);
-        Wb_RegWriteOut.write(0);
+	    Mem_MemWriteOut.write(0); 
+        Mem_MemReadOut.write(0);
+	    Wb_MemtoRegOut.write(1);
+        Wb_RegWriteOut.write(1);
 	}
 	if (InstrucIn.read() == 2)
 	{
-	    Mem_MemWriteOut.write(1); 
-        Mem_MemReadOut.write(1);
-	    Wb_MemtoRegOut.write(0);
-        Wb_RegWriteOut.write(0);
+	    Mem_MemWriteOut.write(0); 
+        Mem_MemReadOut.write(0);
+	    Wb_MemtoRegOut.write(1);
+        Wb_RegWriteOut.write(1);
 	}
 	if (InstrucIn.read() == 3)
 	{
-	    Mem_MemWriteOut.write(1); 
-        Mem_MemReadOut.write(1);
-	    Wb_MemtoRegOut.write(0);
-        Wb_RegWriteOut.write(0);
+	    Mem_MemWriteOut.write(0); 
+        Mem_MemReadOut.write(0);
+	    Wb_MemtoRegOut.write(1);
+        Wb_RegWriteOut.write(1);
 	}
 	if (InstrucIn.read() == 4)
 	{
-	    Mem_MemWriteOut.write(1); 
-        Mem_MemReadOut.write(1);
-	    Wb_MemtoRegOut.write(0);
-        Wb_RegWriteOut.write(0);
+	    Mem_MemWriteOut.write(0); 
+        Mem_MemReadOut.write(0);
+	    Wb_MemtoRegOut.write(1);
+        Wb_RegWriteOut.write(1);
 	}
 	if (InstrucIn.read() == 5)
 	{
-	    Mem_MemWriteOut.write(1); 
-        Mem_MemReadOut.write(1);
-	    Wb_MemtoRegOut.write(0);
-        Wb_RegWriteOut.write(0);
+	    Mem_MemWriteOut.write(0); 
+        Mem_MemReadOut.write(0);
+	    Wb_MemtoRegOut.write(1);
+        Wb_RegWriteOut.write(1);
 	}
+
+	if (InstrucIn.read() == 6)
+	{
+	    Mem_MemWriteOut.write(0); 
+        Mem_MemReadOut.write(0);
+	    Wb_MemtoRegOut.write(1);
+        Wb_RegWriteOut.write(1);
+	}
+
 	if (InstrucIn.read() == 7)
 	{
-	    Mem_MemWriteOut.write(1); 
-        Mem_MemReadOut.write(1);
-	    Wb_MemtoRegOut.write(0);
-        Wb_RegWriteOut.write(0);
+	    Mem_MemWriteOut.write(0); 
+        Mem_MemReadOut.write(0);
+	    Wb_MemtoRegOut.write(1);
+        Wb_RegWriteOut.write(1);
 	}
 	if (InstrucIn.read() == 8)
 	{
-	    Mem_MemWriteOut.write(1); 
-        Mem_MemReadOut.write(0);
-	    Wb_MemtoRegOut.write(1);
-        Wb_RegWriteOut.write(0);
+	    Mem_MemWriteOut.write(0); 
+        Mem_MemReadOut.write(1);
+	    Wb_MemtoRegOut.write(0);
+        Wb_RegWriteOut.write(1);
 	}
 	if (InstrucIn.read() == 9)
 	{
-	    Mem_MemWriteOut.write(0); 
-        Mem_MemReadOut.write(1);
+	    Mem_MemWriteOut.write(1); 
+            Mem_MemReadOut.write(0);
 	    Wb_MemtoRegOut.write(1);
-        Wb_RegWriteOut.write(1);
+            Wb_RegWriteOut.write(0);
 	}
 	if (InstrucIn.read() == 10)
 	{
-	    Mem_MemWriteOut.write(1); 
-        Mem_MemReadOut.write(1);
-	    Wb_MemtoRegOut.write(1);
-        Wb_RegWriteOut.write(1);
+	    Mem_MemWriteOut.write(0); 
+        Mem_MemReadOut.write(0);
+	    Wb_MemtoRegOut.write(0);
+        Wb_RegWriteOut.write(0);
 	}
 	if (InstrucIn.read() == 11)
 	{
-	    Mem_MemWriteOut.write(1); 
-        Mem_MemReadOut.write(1);
-	    Wb_MemtoRegOut.write(1);
-        Wb_RegWriteOut.write(1);
+	    Mem_MemWriteOut.write(0); 
+        Mem_MemReadOut.write(0);
+	    Wb_MemtoRegOut.write(0);
+        Wb_RegWriteOut.write(0);
 	}
 	if (InstrucIn.read() == 12)
 	{
-	    Mem_MemWriteOut.write(1); 
-        Mem_MemReadOut.write(1);
-	    Wb_MemtoRegOut.write(1);
-        Wb_RegWriteOut.write(1);
+	    Mem_MemWriteOut.write(0); 
+        Mem_MemReadOut.write(0);
+	    Wb_MemtoRegOut.write(0);
+        Wb_RegWriteOut.write(0);
 	}
 
 	if (InstrucIn.read() == 13)
 	{
-	    Mem_MemWriteOut.write(1); 
-        Mem_MemReadOut.write(1);
-	    Wb_MemtoRegOut.write(0);
-        Wb_RegWriteOut.write(0);
+	    Mem_MemWriteOut.write(0); 
+        Mem_MemReadOut.write(0);
+	    Wb_MemtoRegOut.write(1);
+        Wb_RegWriteOut.write(1);
 	}
 	if (InstrucIn.read() == 14)
 	{
-	    Mem_MemWriteOut.write(1); 
-        Mem_MemReadOut.write(1);
-	    Wb_MemtoRegOut.write(0);
-        Wb_RegWriteOut.write(0);
+	    Mem_MemWriteOut.write(0); 
+        Mem_MemReadOut.write(0);
+	    Wb_MemtoRegOut.write(1);
+        Wb_RegWriteOut.write(1);
 	}
 
 	if (InstrucIn.read() == 15)
 	{
-	    Mem_MemWriteOut.write(1); 
-        Mem_MemReadOut.write(1);
-	    Wb_MemtoRegOut.write(1);
-        Wb_RegWriteOut.write(1);
+	    Mem_MemWriteOut.write(0); 
+        Mem_MemReadOut.write(0);
+	    Wb_MemtoRegOut.write(0);
+        Wb_RegWriteOut.write(0);
 	}
 
 	if (InstrucIn.read() == 16)
 	{
-	    Mem_MemWriteOut.write(1); 
-        Mem_MemReadOut.write(1);
-	    Wb_MemtoRegOut.write(1);
-        Wb_RegWriteOut.write(1);
+	    Mem_MemWriteOut.write(0); 
+        Mem_MemReadOut.write(0);
+	    Wb_MemtoRegOut.write(0);
+        Wb_RegWriteOut.write(0);
 	}
 
 
