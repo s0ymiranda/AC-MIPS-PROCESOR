@@ -14,9 +14,8 @@ public:
 	SC_CTOR(Testbench);
 
 private:
-	sc_uint<4> instruction;
-	sc_uint<5> operand1, operand2;
-	sc_int<18> operand3;
+	sc_uint<5> operand1, operand2, instruction;
+	sc_int<17> operand3;
 
 	void
 	print();

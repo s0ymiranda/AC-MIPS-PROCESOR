@@ -24,28 +24,27 @@ void Testbench::test(){
 		wait();
 		wait();
 
-		for (sc_uint<3> i = 0; i < 4; i++)
+		for (sc_uint<5> i = 0; i < 5; i++)
 			instruction[i] = operationIn.read()[i];
 
 		if (instruction == 3 or instruction == 6 or instruction == 7 or instruction == 12 or instruction == 13 or instruction == 8 or instruction == 9 or instruction == 14 or instruction == 15){
-			for (sc_uint<4> i = 4, j = 0; i < 9; i++, j++)
+			for (sc_uint<5> i = 5, j = 0; i < 10; i++, j++)
 				operand1[j] = operationIn.read()[i];
 
-			for (sc_uint<4> i = 9, j = 0; i < 14; i++, j++)
+			for (sc_uint<6> i = 10, j = 0; i < 15; i++, j++)
 				operand2[j] = operationIn.read()[i];
 
-			for (sc_uint<6> i = 14, j = 0; i < 32; i++, j++)
+			for (sc_uint<6> i = 15, j = 0; i < 32; i++, j++)
 				operand3[j] = operationIn.read()[i];
 		}
-		else
-		{
-			for (sc_uint<4> i = 4, j = 0; i < 9; i++, j++)
+		else{
+			for (sc_uint<5> i = 5, j = 0; i < 10; i++, j++)
 				operand1[j] = operationIn.read()[i];
 
-			for (sc_uint<4> i = 9, j = 0; i < 14; i++, j++)
+			for (sc_uint<6> i = 10, j = 0; i < 15; i++, j++)
 				operand2[j] = operationIn.read()[i];
 
-			for (sc_uint<5> i = 14, j = 0; i < 19; i++, j++)
+			for (sc_uint<6> i = 15, j = 0; i < 19; i++, j++)
 				operand3[j] = operationIn.read()[i];
 		}
 		print();

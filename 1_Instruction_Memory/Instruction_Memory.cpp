@@ -58,7 +58,7 @@ void InstructionMemory::list (std::string instruction){
   */
 
   /*
-  Bits 0 - 4, tipo de instruccion 
+  Bits 0 - 4, tipo de instruccion OpCode
 	Bits 5 - 9, primer registro rs1
 	Bits 10 - 14, segundo registro rs2
 	Bits 15 - 19, tercer registro rd
@@ -168,7 +168,6 @@ cout<<endl<<"dir3: "<<"="<<dir03<<endl;
 	immValidation(imm);
 
 	operand += imm;
-
 	operand <<= 5;
 	operand += rd;
 	operand <<= 10; //porque rs2 es 0
