@@ -18,7 +18,7 @@ class EX_MEM : public sc_module{
 	sc_out<bool> Wb_MemtoRegOut, Wb_RegWriteOut; 
 
     sc_in<sc_int<32>> memo_In[2];
-	sc_out<sc_int<32>> memo_Out[3];
+	sc_out<sc_int<32>> memo_Out[2];
 
     SC_CTOR(EX_MEM);
     private:
