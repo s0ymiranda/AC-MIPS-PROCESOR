@@ -10,7 +10,7 @@ TestBench::TestBench(sc_module_name mn) : sc_module(mn) {
 
 void TestBench::print() {
   std::cout << sc_time_stamp() ;
-  std::cout << rdOut.read() << "    ";
+  std::cout <<"    " << rdOut.read() << "    ";
   std::cout << rs1Out.read() << "    ";
   std::cout << rs2Out.read() << "     ";
   std::cout << s1In.read() << "    ";
@@ -20,10 +20,9 @@ void TestBench::print() {
 
 void TestBench::test() {
   std::cout << "------------File Register TestBench-------------\n" ; 
-  std::cout << "     rd   rs1  rs2   s1   s2    r     \n";
-  print();
+  std::cout << "         rd   rs1  rs2   s1   s2    r     \n";
 
-  //recorrido para llenar todos los valores posibles para las dos entradas
+  //recorrido para llenar valores posibles para las dos entradas
   rdOut.write(3);
   rs1Out.write(5);
   rs2Out.write(3);
@@ -37,13 +36,33 @@ void TestBench::test() {
 
   print();
 
+  rdOut.write(3);
   rs1Out.write(3);
   rs2Out.write(3);
+  weOut.write(1);
+  rOut.write(7);
+  
   wait();
   wait();
   wait();
- 
+  wait();
+
   print();
+
+  rdOut.write(3);
+  rs1Out.write(5);
+  rs2Out.write(3);
+  weOut.write(0);
+  rOut.write(7);
+  
+  wait();
+  wait();
+  wait();
+  wait();
+
+  print();
+ 
+
 
 
   sc_stop();

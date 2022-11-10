@@ -9,9 +9,11 @@ PC::PC(sc_module_name mn) : sc_module(mn), adressIn("adressIn"), adressAdderOut(
 }
 
 void PC::write() {
-	adressInstructionMemoryOut.write(adress);
-	adressAdderOut.write(adress);
-	adressPC_IF_IDOut.write(adress);
+	if(HazardIn.read() !=0 ){
+		adressInstructionMemoryOut.write(adress);
+		adressAdderOut.write(adress);
+		adressPC_IF_IDOut.write(adress);
+	}
 }
 
 void PC::read() {

@@ -10,9 +10,14 @@ int sc_main(int argc, char* argv[]){
 	Testbench tb("tb");
   
 	sc_signal<sc_int<32>> adressSg, adressAdderSg, adressPC_IF_IDSg, adressInstructionMemorySg;
-
+	sc_signal<bool> HazardSg;
 	tb.clk(clock);
 	pc.clk(clock);
+
+
+	pc.HazardIn(HazardSg);
+	tb.HazardOut(HazardSg);
+
 
 	pc.adressIn(adressSg);
 	tb.adressOut(adressSg);
