@@ -125,4 +125,18 @@ if(hazardIn.read() == 0){
     
 }
 
+if(controlFlushIn.read() == 1){
+	fileRegister1Out.write(0);
+	fileRegister2Out.write(0);
+    ID_EX0Out.write(0);
+    ID_unidadControlOut.write(0);
+    ID_EX1Out.write(0);
+    ID_EX2Out.write(0);
+    ID_EX3Out.write(0);
+    immGenOut.write(0);
+    ID_HDUrs1Out.write(0);
+    ID_HDUrs2Out.write(0);
+
+}
+
 }

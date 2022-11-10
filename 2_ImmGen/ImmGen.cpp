@@ -11,4 +11,5 @@ ImmGen::ImmGen(sc_module_name moduleName) : sc_module(moduleName)
 void ImmGen::operation()
 {
 	ID_EXOut.write(IF_IDIn.read());
+	AdderOut.write(IF_IDIn.read());
 }

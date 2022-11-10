@@ -17,6 +17,10 @@ void TestBench::print(){
   for(int i = 31 ; i >= 0 ; i--)
     std::cout << ID_EXIn.read()[i];
 
+  std::cout << "\n Adder  IN: ";
+  for(int i = 31 ; i >= 0 ; i--)
+    std::cout << AdderIn.read()[i];
+
 }
 void TestBench::test() {
     
