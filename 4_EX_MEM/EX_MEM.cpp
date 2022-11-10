@@ -11,7 +11,7 @@ void EX_MEM::operation(){
     //Verificación para no sobrepasar los límites establecidos en el data memory
     if (Mem_MemWriteIn.read() or Mem_MemReadIn.read()){
 		try{
-			if (memo_In[1].read() < 0 || memo_In[1].read() >= 256)
+			if (memo_In[0].read() < 0 || memo_In[0].read() >= 256)
 				throw 0;
 		}
 		catch (...)
