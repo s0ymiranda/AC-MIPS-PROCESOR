@@ -39,7 +39,7 @@ int sc_main(int argc, char *argv[])
 
     //Instruction Fetch modules:
 
-    //Mux2 mux2("mux2");
+    Mux5 mux5_a("mux5");
     Adder adder_1("adder_1");
     PC pc("pc");
     InstructionMemory instruction_memory("instruction memory");
@@ -47,12 +47,16 @@ int sc_main(int argc, char *argv[])
 
     //Instruction Fetch signals:
 
-    sc_signal<sc_int<32>> PCAddressInSg, PCAddressIF_IDOutSg, PCAddressInsMemOutSg, PCAddressAdderOutSg;
+    sc_signal<sc_int<32>> PCAddressOutSg, PCAddressIF_IDOutSg, PCAddressInsMemOutSg, PCAddressAdderOutSg, Adder_1MuxOutSg;
     sc_signal<sc_uint<32>> InsMemOperationOutSg;
 
     //Connecting the signals to the ports:
 
-    pc.adressIn(PCAddressInSg);
+    mux5_a.aIn(Adder_2MuxOutSg);
+    mux5_a.bIn(Adder_1MuxOutSg);
+    mux.cOut(PCAddressOutSg);
+
+    pc.adressIn(PCAddressOutSg);
     pc.adressAdderOut(PCAddressAdderOutSg);
     pc.adressPC_IF_IDOut(PCAddressIF_IDOutSg);
     pc.adressInstructionMemoryOut(PCAddressInsMemOutSg);
@@ -62,7 +66,7 @@ int sc_main(int argc, char *argv[])
     
     adder_1.aIn(PCAddressAdderOutSg);
     //adder_1.bIn(); This is always a number (4)
-    //adder.resultOut();
+    adder.resultOut(Adder_1MuxOutSg);
 
 //==============================================================================================
 
@@ -78,7 +82,7 @@ int sc_main(int argc, char *argv[])
     //Instruction Decode signals:
 
     sc_signal<bool> hazzardSg;
-    sc_signal<sc_int<32>> ID_EXAdderOutSg, RegisterFileID_EXrs1OutSg, RegisterFileID_EXrs2OutSg, ImmGenID_EXOutSg;
+    sc_signal<sc_int<32>> ID_EXAdderOutSg, RegisterFileID_EXrs1OutSg, RegisterFileID_EXrs2OutSg, ImmGenID_EXOutSg, ImmGenAdderOutSg, Adder_2MuxOutSg;
     sc_signal<sc_uint<5>> RegisterFile1OutSg, RegisterFile2OutSg, RegisterRs1OutSg, RegisterRs2OutSg, TargetRegisterOutSg;
     sc_signal<sc_int<12>> immGenOutSg;
     sc_signal<sc_uint<5>> HDUrs1OutSg, HDUrs2OutSg, ControlOutSg;
@@ -100,7 +104,8 @@ int sc_main(int argc, char *argv[])
     if_id.ID_HDUrs2Out(HDUrs2OutSg);
 
     adder_2.aIn(ID_EXAdderOutSg);
-    //adder_2.resultOut();
+    adder_2.bIn(ImmGenAdderOutSg);
+    adder_2.resultOut(Adder_2MuxOutSg);
 
     register_file.rs1In(RegisterFile1OutSg);
     register_file.rs2In(RegisterFile2OutSg);
@@ -112,6 +117,7 @@ int sc_main(int argc, char *argv[])
 
     imm_gen.IF_IDIn(immGenOutSg);
     imm_gen.ID_EXOut(ImmGenID_EXOutSg);
+    immGen.AdderOut(ImmGenAdderOutSg);
 
     hdu.rs1In(HDUrs1OutSg);
     hdu.rs2In(HDUrs2OutSg);
@@ -135,7 +141,6 @@ int sc_main(int argc, char *argv[])
     sc_signal<sc_int<32>> ID_EXMux1OutSg, ID_EXMux2OutSg, Mux1ALUrs1OutSg, Mux2ALUrs2OutSg, ALUResultOutSg;
     sc_signal<sc_uint<5>> ID_EXF_Unitrs1OutSg, ID_EXF_Unitrs2OutSg, EX_MEMTargetRegisterOutSg;
     sc_signal<bool> Mux1_aOutSg, Mux1_bOutSg, Mux2_aOutSg, Mux2_bOutSg; 
-    //Waiting for the next stages (MEM, WB)
 
 
     //Connecting the signals to the ports:
@@ -221,7 +226,7 @@ int sc_main(int argc, char *argv[])
     //WriteBack modules:
 
     MEM_WB mem_wb("mem_wb");
-    Mux5 mux5("mux5");
+    Mux5 mux5_b("mux5");
 
     //WriteBack signals:
 
@@ -237,11 +242,11 @@ int sc_main(int argc, char *argv[])
     mem_wb.Wb_RegWOut(rs2MEM_WBMuxOutSg);
     mem_wb.dir_Out(MEM_WBTargetRegisterOutSg);
 
-    mux5.aIn(ResultALUMuxOutSg);
-    mux5.bIn(rs2MEM_WBMuxOutSg);
-    //mux5.sIn();
-    mux5.cOut(MuxRegisterFileOutSg);
-    
+    mux5_b.aIn(ResultALUMuxOutSg);
+    mux5_b.bIn(rs2MEM_WBMuxOutSg);
+    //mux5_b.sIn();
+    mux5_b.cOut(MuxRegisterFileOutSg);
+
 
 //==============================================================================================
 
