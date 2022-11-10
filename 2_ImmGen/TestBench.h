@@ -8,7 +8,8 @@ class TestBench : public sc_module {
     public:
         sc_in_clk clk;
         sc_out<sc_int<12>> IF_IDOut;
-	    sc_in<sc_int<32>> ID_EXIn;         
+	    sc_in<sc_int<32>> ID_EXIn;  
+        sc_in<sc_int<32>> AdderIn;         
             
 
         SC_CTOR(TestBench);

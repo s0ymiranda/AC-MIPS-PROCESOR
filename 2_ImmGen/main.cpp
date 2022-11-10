@@ -14,13 +14,16 @@ int sc_main(int argc, char* argv[])
 	immGen.clk(clock);
 
 	sc_signal<sc_int<12>> Sg1;
-	sc_signal<sc_int<32>> Sg2;
+	sc_signal<sc_int<32>> Sg2, AdderSg;
 
 	tb.IF_IDOut(Sg1);
 	immGen.IF_IDIn(Sg1);
 
 	tb.ID_EXIn(Sg2);
 	immGen.ID_EXOut(Sg2);
+
+	tb.AdderIn(AdderSg);
+	immGen.AdderOut(AdderSg);
 
 	sc_start();
 
