@@ -4,7 +4,7 @@
 # Versión de SYSTEMC
 	VERSION = systemc-2.3.3
 # Especifique los archivos .cpp
-	SRCS = main.cpp TestBench.cpp Hazard_Detection_Unit.cpp ../Gates/AndGate.cpp ../Gates/AndGate5.cpp ../Gates/OrGate.cpp 
+	SRCS = main.cpp TestBench.cpp Control_Unit.cpp 
 # Nombre del ejecutable
 	TARGET = test
 #

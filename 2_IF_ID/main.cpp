@@ -12,7 +12,7 @@ int sc_main(int argc, char *argv[])
 
 	sc_signal<sc_uint<32>> insMemSg;
 	sc_signal<sc_int<32>> pcSg, ID_EX0Sg;
-    sc_signal<bool> hazzardSg;
+    sc_signal<bool> hazzardSg, FlushSg;
 	sc_signal<sc_uint<5>> fileRegister1Sg, fileRegister2Sg, ID_EX1Sg, ID_EX2Sg, ID_EX3Sg;
 	sc_signal<sc_int<12>> immGenSg;
 	sc_signal<sc_uint<5>> ID_HDUrs1Sg, ID_HDUrs2Sg, ID_UnidadControlSg;
@@ -30,6 +30,7 @@ int sc_main(int argc, char *argv[])
 	if_id.ID_unidadControlOut(ID_UnidadControlSg);
     if_id.ID_HDUrs1Out(ID_HDUrs1Sg);
 	if_id.ID_HDUrs2Out(ID_HDUrs2Sg);
+	if_id.controlFlushIn(FlushSg);
 	
 	tb.pcOut(pcSg);
 	tb.insMemOut(insMemSg);
@@ -44,6 +45,7 @@ int sc_main(int argc, char *argv[])
 	tb.ID_unidadControlIn(ID_UnidadControlSg);
 	tb.ID_HDUrs1In(ID_HDUrs1Sg);
 	tb.ID_HDUrs2In(ID_HDUrs2Sg);
+	tb.controlFlushOut(FlushSg);
 
 
 	tb.clk(clock);

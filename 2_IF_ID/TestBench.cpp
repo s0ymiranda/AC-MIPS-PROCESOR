@@ -9,8 +9,8 @@ TestBench::TestBench(sc_module_name mn) : sc_module(mn) {
 }
 
 void TestBench::print() {
-
-    std::cout <<"\n\n\nPc: " << pcOut.read();
+    std::cout << "\n\n\n FFLUSH: " << controlFlushOut.read();
+    std::cout <<"\nPc: " << pcOut.read();
     std::cout << "\nID_EX0: " << ID_EX0In.read();
     std::cout << "\nHazardOut " << hazardOut.read();
     std::cout << "\nRs1: " << fileRegister1In.read();
@@ -30,38 +30,39 @@ void TestBench::test() {
 
     pcOut.write(0);
     hazardOut.write(0);
+    controlFlushOut.write(1);
     insMemOut.write(54546166);
     wait();
     wait();
     print();
 
-    pcOut.write(1);
-    
+    pcOut.write(0);
+    controlFlushOut.write(0);
     insMemOut.write(548452);    
-    hazardOut.write(1);
+    hazardOut.write(0);
     wait();
     wait();
     print();
     
     pcOut.write(1);
-    
-    insMemOut.write(15485620);
+    controlFlushOut.write(0);
+    insMemOut.write(15620);
     hazardOut.write(0);
+    wait();
+    wait();
+    print();
+
+    pcOut.write(1);
+    hazardOut.write(1);
+    controlFlushOut.write(0);
+    insMemOut.write(2);
     wait();
     wait();
     print();
 
     pcOut.write(2);
     hazardOut.write(0);
-
-    insMemOut.write(2);
-    wait();
-    wait();
-    print();
-
-    pcOut.write(3);
-    hazardOut.write(0);
-
+    controlFlushOut.write(0);
     insMemOut.write(48454465);
     wait();
     wait();

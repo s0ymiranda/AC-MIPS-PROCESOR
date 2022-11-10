@@ -4,12 +4,13 @@
 int sc_main(int argc, char* argv[]){
 
 	sc_time period(10, SC_NS);
-	sc_time delay(10, SC_NS);
-	sc_clock clock("clock", period, 5, delay, false);
+	sc_time delay(0, SC_NS);
+	sc_clock clock("clock", period, 0.5, delay, true);
 
 	Hazard_Detection_Unit hdu("hdu");
 	TestBench tb("tb");
 
+    hdu.clk(clock);
 	tb.clk(clock);
 
 	sc_signal<sc_uint<5>> IDEXInstrucSg, rs1Sg, rs2Sg, IDEXrdSg;
