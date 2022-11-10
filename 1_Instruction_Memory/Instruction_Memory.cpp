@@ -201,7 +201,7 @@ cout<<endl<<"dir3: "<<"="<<dir03<<endl;
 		operand += offset;
 		operand <<= 5;
 		operand += rd;
-		operand <<= 10;
+		operand <<= 10; //rs2 es 0
 		operand += rs1;
 		operand <<= 5;
 		if (aux == "lw")
@@ -252,7 +252,7 @@ cout<<endl<<"dir3: "<<"="<<dir03<<endl;
 		*/
 		
     operand += linea;
-		operand <<= 10;
+		operand <<= 10; //rd es 0
 		operand += rs2;
 		operand <<= 5;
 		operand += rs1;
