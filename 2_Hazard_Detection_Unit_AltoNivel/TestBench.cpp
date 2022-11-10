@@ -13,39 +13,28 @@ void TestBench::test(){
 	srand(time(NULL));
 	
 
-
 	std::cout << " Time    ID/EXInstruc    IF/IDrs1   IF/IDrs2   ID/EXrd   PcWrite IF/IDWrite MuxControl\n";
 	std::cout << "--------------------------------------------------------------------------------------\n";
-        IDEXInstrucOut.write(4);
-		rs1Out.write(10);         //valores de prueba 
-		rs2Out.write(2);
-        IDEXrdOut.write(7);
-		wait();
-        wait();
-		print();
 
-		IDEXInstrucOut.write(8);
-		rs1Out.write(10);         //valores de prueba 
-		rs2Out.write(2);
-        IDEXrdOut.write(10);
-		wait();
-		wait();
-		print();
-
-        IDEXInstrucOut.write(4);
-		rs1Out.write(10);         //valores de prueba 
-		rs2Out.write(2);
-        IDEXrdOut.write(7);
-		wait();
-        wait();
-		print();
-
-    	IDEXInstrucOut.write(8);
+		IDEXInstrucOut.write(3);
 		rs1Out.write(10);         //valores de prueba 
 		rs2Out.write(2);
         IDEXrdOut.write(2);
         wait();
-		wait();
+		print();
+
+        IDEXInstrucOut.write(9);
+		rs1Out.write(10);         //valores de prueba 
+		rs2Out.write(2);
+        IDEXrdOut.write(7);
+        wait();
+		print();
+
+    	IDEXInstrucOut.write(9);
+		rs1Out.write(10);         //valores de prueba 
+		rs2Out.write(2);
+        IDEXrdOut.write(2);
+        wait();
 		print();
 
 
