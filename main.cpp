@@ -104,9 +104,9 @@ int sc_main(int argc, char *argv[])
 
     register_file.rs1In(RegisterFile1OutSg);
     register_file.rs2In(RegisterFile2OutSg);
-    //register_file.rIn();
+    register_file.rIn(MuxRegisterFileOutSg);
     //register_file.weIn();
-    //register_file.rdIn(rdSg);
+    register_file.rdIn(MEM_WBTargetRegisterOutSg);
     register_file.s1Out(RegisterFileID_EXrs1OutSg);
     register_file.s2Out(RegisterFileID_EXrs2OutSg);
 
@@ -153,15 +153,15 @@ int sc_main(int argc, char *argv[])
     id_ex.target_registerOut(EX_MEMTargetRegisterOutSg);
 
     mux_1.value_1In(ID_EXMux1OutSg);
-    //mux_1.value_2In();
-    //mux_1.value_3In();
+    mux_1.value_2In(MuxRegisterFileOutSg);
+    mux_1.value_3In(ALUResultDataMemoryOutSg);
     mux_1.aIn(Mux1_aOutSg);
     mux_1.bIn(Mux1_bOutSg);
     mux_1.valueOut(Mux1ALUrs1OutSg);
 
     mux_2.value_1In(ID_EXMux2OutSg);
-    //mux_2.value_2In();
-    //mux_2.value_3In();
+    mux_2.value_2In(MuxRegisterFileOutSg);
+    mux_2.value_3In(ALUResultDataMemoryOutSg);
     mux_2.aIn(Mux2_aOutSg);
     mux_2.bIn(Mux2_aOutSg);
     mux_2.valueOut(Mux2ALUrs2OutSg);
@@ -173,8 +173,8 @@ int sc_main(int argc, char *argv[])
 
     f_unit.rs1_registerIn(ID_EXF_Unitrs1OutSg);
     f_unit.rs2_registerIn(ID_EXF_Unitrs2OutSg);
-    //f_unit.mem_wb_registerIn();
-    //f_unit.ex_mem_registerIn();
+    f_unit.ex_mem_registerIn(TargetRegisterMEM_WBOutSg);
+    f_unit.mem_wb_registerIn(MEM_WBTargetRegisterOutSg);
     //f_unit.mux1In();
     //f_unit.mux2In();
     f_unit.mux1_aOut(Mux1_aOutSg);
@@ -184,7 +184,66 @@ int sc_main(int argc, char *argv[])
 
 //==============================================================================================
 
+    //MemoryAccess modules:
 
+    EX_MEM ex_mem("ex_mem");
+    Data_Memory data_memory("data memory");
+
+    //MemoryAcces signals:
+
+    sc_signal<sc_int<32>> ALUResultDataMemoryOutSg, rs2DataMemoryOutSg, TargetRegisterMEM_WBOutSg, ResultMEM_WBOutSg;
+
+    
+
+    //Connecting the signals to the ports:
+
+    ex.mem.memo_In0(ALUResultOutSg);
+    ex.mem.memo_In1(Mux2ALUrs2OutSg);
+    ex_mem.direccion_In(EX_MEMTargetRegisterOutSg);
+    ex.mem.memo_Out0(ALUResultDataMemoryOutSg);
+    ex.mem.memo_Out1(rs2DataMemoryOutSg);
+    ex.mem.memo_Out1(TargetRegisterMEM_WBOutSg);
+    //ex_mem.Mem_MemWriteIn();
+    //ex_mem.Mem_MemReadIn();
+    //ex_mem.Wb_MemtoRegIn();
+    //ex_mem.Wb_RegWriteIn();
+
+    data_memory.addressIn(ALUResultDataMemoryOutSg);
+    data_memory.write_dataIn(rs2DataMemoryOutSg);
+    //data_memory.writeIn(); 
+    //data_memory.readIn();
+    data_memory.read_dataOut(ResultMEM_WBOutSg);
+    data_memory.read_dataOut(rs2DataMemoryOutSg);
+
+//==============================================================================================
+
+
+    //WriteBack modules:
+
+    MEM_WB mem_wb("mem_wb");
+    Mux5 mux5("mux5");
+
+    //WriteBack signals:
+
+    sc_signal<sc_int<32>> ResultALUMuxOutSg, rs2MEM_WBMuxOutSg, MEM_WBTargetRegisterOutSg, MuxRegisterFileOutSg;
+
+
+    //Connecting the signals to the ports:
+
+    mem_wb.Wb_MRegIn(ResultMEM_WBOutSg);
+    mem_wb.Wb_RegWIn(rs2DataMemoryOutSg);
+    mem_wb.dir_In(TargetRegisterMEM_WBOutSg);
+    memm_wb.Wb_MRegOut(ResultALUMuxOutSg);
+    mem_wb.Wb_RegWOut(rs2MEM_WBMuxOutSg);
+    mem_wb.dir_Out(MEM_WBTargetRegisterOutSg);
+
+    mux5.aIn(ResultALUMuxOutSg);
+    mux5.bIn(rs2MEM_WBMuxOutSg);
+    //mux5.sIn();
+    mux5.cOut(MuxRegisterFileOutSg);
+    
+
+//==============================================================================================
 
 
 
