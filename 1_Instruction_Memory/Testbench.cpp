@@ -11,7 +11,7 @@ Testbench::Testbench(sc_module_name TB_InstructionMemory) : sc_module(TB_Instruc
 
 void Testbench::test(){
 	wait();
-	std::cout << " Time    operand1    operand2    operand3    instruction\n";
+	std::cout << "Time     opCode      rs1       rs2       rd        imm\n";
 	std::cout << "--------------------------------------------------------\n";
 
 	// Si Instruction Memory es sensible a la entrada, la lectura de la linea 0 no la detecta, si no que es la lectura por defecto al principio del programa. Por esto, basta con colocar un wait ac� y ya tendremos la lectura de la primera l�nea. En este caso, el for empezar�a a partir de 1 (0 ya lo ley�)
@@ -24,42 +24,38 @@ void Testbench::test(){
 		wait();
 		wait();
 
-		for (sc_uint<5> i = 0; i < 5; i++)
-			instruction[i] = operationIn.read()[i];
-
-		if (instruction == 3 or instruction == 6 or instruction == 7 or instruction == 12 or instruction == 13 or instruction == 8 or instruction == 9 or instruction == 14 or instruction == 15){
-			for (sc_uint<5> i = 5, j = 0; i < 10; i++, j++)
-				operand1[j] = operationIn.read()[i];
-
-			for (sc_uint<6> i = 10, j = 0; i < 15; i++, j++)
-				operand2[j] = operationIn.read()[i];
-
-			for (sc_uint<6> i = 15, j = 0; i < 32; i++, j++)
-				operand3[j] = operationIn.read()[i];
+	for (sc_uint<5> i = 0; i < 5; i++){
+		opCode[i] = operationIn.read()[i];
 		}
-		else{
-			for (sc_uint<5> i = 5, j = 0; i < 10; i++, j++)
-				operand1[j] = operationIn.read()[i];
 
-			for (sc_uint<6> i = 10, j = 0; i < 15; i++, j++)
-				operand2[j] = operationIn.read()[i];
+	for (sc_uint<5> i = 5, j = 0; i < 10; i++, j++){
+		rs1[j] = operationIn.read()[i];
+	}
 
-			for (sc_uint<6> i = 15, j = 0; i < 19; i++, j++)
-				operand3[j] = operationIn.read()[i];
+	for (sc_uint<6> i = 10, j = 0; i < 15; i++, j++){
+		rs2[j] = operationIn.read()[i];
+	}
+
+	for (sc_uint<6> i = 15, j = 0; i < 20; i++, j++){
+		rd[j] = operationIn.read()[i];
+		}
+
+		for (sc_uint<6> i = 20, j = 0; i < 32; i++, j++){
+			imm[j] = operationIn.read()[i];
 		}
 		print();
 	}
 
-	std::cout << "--------------------------------------------------------\n";
+	std::cout << "------------------------------------------------------\n";
 
 	sc_stop();
 }
 
-void Testbench::print()
-{
+void Testbench::print(){
 	std::cout << std::setw(5) << sc_time_stamp();
-	std::cout << std::setw(12) << operand1.to_string();
-	std::cout << std::setw(12) << operand2.to_string();
-	std::cout << std::setw(12) << operand3.to_string();
-	std::cout << std::setw(15) << instruction.to_string() << '\n';
+	std::cout << std::setw(8) << opCode.to_string();
+	std::cout << std::setw(10) << rs1.to_string();
+	std::cout << std::setw(10) << rs2.to_string();
+	std::cout << std::setw(10) << rd.to_string();
+	std::cout << std::setw(10) << imm.to_string() << endl;
 }

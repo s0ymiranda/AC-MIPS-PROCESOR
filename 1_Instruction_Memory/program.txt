@@ -1,3 +1,16 @@
+<<<<<<< HEAD
 add x15, x18, x27
 beq x3, x4, hola 
 hola: sub x2, x3, 45
+=======
+addi x15, x0, 56
+addi x17, x0, 50
+sw x15, 0(x0)
+sw x16, 1(x0)
+sub x3, x1, x4
+beq x0, x0, jump
+sw x15, 0(x0)
+sw x16, 1(x0)
+sub x3, x1, x4
+jump: add x0, x0, x0
+>>>>>>> d0b7a875adaa1ff7196e28fa8fb6e7418a0e5de6
