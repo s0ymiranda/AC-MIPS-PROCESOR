@@ -7,7 +7,7 @@ int sc_main(int argc, char* argv[])
 	sc_time delay(10, SC_NS);
 	sc_clock clock("clock", period, 5, delay, false);
 
-	Mux mux("mux");
+	Mux5 mux("mux");
 	Testbench tb("tb");
 
 	tb.clk(clock);
