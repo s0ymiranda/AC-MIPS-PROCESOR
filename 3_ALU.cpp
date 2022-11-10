@@ -1,4 +1,4 @@
-#include "ALU.h"
+#include "3_ALU.h"
 
 ALU :: ALU(sc_module_name nm) : sc_module(nm), value_1In("value_1In"), value_2In("value_2In"), resultOut("resultOut")
 {

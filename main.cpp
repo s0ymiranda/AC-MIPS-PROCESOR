@@ -1,29 +1,34 @@
 //Including Instruction Fetch libraries
 
 #include "Mux2.h"
-#include "PC.h"
-#include "Instruction_Memory.h"
+#include "1_PC.h"
+#include "1_Instruction_Memory.h"
 
 //Including Instruction Decode libraries
 
-#include "Adder.h"
-#include "Branch_Condition.h"
-#include "Hazard_Detection_Unit.h"
-#include "IF_ID.h"
-#include "ImmGen.h"
-#include "RegisterFile.h"
+#include "2_Adder.h"
+#include "2_Branch_Condition.h"
+#include "2_Hazard_Detection_Unit.h"
+#include "2_Control_Unit.h"
+#include "2_IF_ID.h"
+#include "2_ImmGen.h"
+#include "2_RegisterFile.h"
 
 //Including Execution libraries
 
-#include "ALU.h"
-#include "FORWARDING_UNIT.h"
-#include "ID_EX.h"
-#include "MUX_3.h"
+#include "3_ALU.h"
+#include "3_FORWARDING_UNIT.h"
+#include "3_ID_EX.h"
+#include "3_MUX_3.h"
+
+//Including Mem libraries
+#include "4_EX_MEM.h"
+#include "4_Data_Memory.h"
 
 //Including WriteBack libraries
 
 #include "5_Mux.h"
-#include "MEM_WB.h"
+#include "5_MEM_WB.h"
 
 
 int sc_main(int argc, char *argv[])

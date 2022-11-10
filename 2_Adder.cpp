@@ -1,4 +1,4 @@
-#include "Adder.h"
+#include "2_Adder.h"
 
 Adder::Adder(sc_module_name moduleName) : sc_module(moduleName){
 

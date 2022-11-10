@@ -1,4 +1,4 @@
-#include "PC.h"
+#include "1_PC.h"
 
 PC::PC(sc_module_name mn) : sc_module(mn), adressIn("adressIn"), adressAdderOut("adressAdderOut"), adressPC_IF_IDOut("adressPC_IF_IDOut"), adressInstructionMemoryOut("adressInstructionMemoryOut") {
 	SC_METHOD(write);

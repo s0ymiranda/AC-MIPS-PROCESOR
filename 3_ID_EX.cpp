@@ -1,4 +1,4 @@
-#include "ID_EX.h"
+#include "3_ID_EX.h"
 
 id_ex::id_ex(sc_module_name nm) : sc_module(nm)
 {

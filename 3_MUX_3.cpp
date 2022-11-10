@@ -1,4 +1,4 @@
-#include "MUX_3.h"
+#include "3_MUX_3.h"
 
 Mux :: Mux(sc_module_name moduleName) : sc_module(moduleName), aIn("aIn"), bIn("bIn"), value_1In("value_1In"), value_2In("value_2In"), value_3In("value_3In"), valueOut("valueOut")
 {

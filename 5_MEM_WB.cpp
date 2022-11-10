@@ -1,4 +1,4 @@
-#include "MEM_WB.h"
+#include "5_MEM_WB.h"
 
 MEM_WB::MEM_WB(sc_module_name nm) : sc_module(nm)
 {

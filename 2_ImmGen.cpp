@@ -1,4 +1,4 @@
-#include "ImmGen.h"
+#include "2_ImmGen.h"
 
 ImmGen::ImmGen(sc_module_name moduleName) : sc_module(moduleName)
 {

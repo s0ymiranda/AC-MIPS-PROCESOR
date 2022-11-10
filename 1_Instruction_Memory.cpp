@@ -1,4 +1,4 @@
-#include "Instruction_Memory.h"
+#include "1_Instruction_Memory.h"
 
 InstructionMemory::InstructionMemory(sc_module_name moduleName) : sc_module(moduleName), instructionNumberIn("instructonNumberIn"), operationOut("operationOut"){
 

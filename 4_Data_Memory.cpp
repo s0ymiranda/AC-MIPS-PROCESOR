@@ -1,4 +1,4 @@
-#include "Data_Memory.h"
+#include "4_Data_Memory.h"
 
 Data_Memory::Data_Memory(sc_module_name nm) : sc_module(nm){
 	SC_METHOD(write);

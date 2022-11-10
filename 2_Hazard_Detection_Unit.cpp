@@ -1,4 +1,4 @@
-#include "Hazard_Detection_Unit.h"
+#include "2_Hazard_Detection_Unit.h"
 
 Hazard_Detection_Unit::Hazard_Detection_Unit(sc_module_name moduleName) : sc_module(moduleName){
 
