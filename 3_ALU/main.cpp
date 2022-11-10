@@ -11,7 +11,8 @@ int sc_main(int argv, char* argc[]) {
   ALU alu("alu");
   TestBench testbench("testbench");
 
-  sc_signal<sc_int<32>> value_1, value_2, instruct, result;
+  sc_signal<sc_int<32>> value_1, value_2, result;
+  sc_signal<sc_uint<5>> instruct;
 
 
   alu.value_1In(value_1);
