@@ -44,7 +44,7 @@ int sc_main(int argc, char *argv[])
 
 
 	tb.clk(clock);
-	//cu.clk(clock);
+	cu.clk(clock);
 
 	sc_start();
 

@@ -1,6 +1,6 @@
 //Including Instruction Fetch libraries
-
-#include "Mux2.h"
+#include "1_Adder.h"
+#include "1_Mux.h"
 #include "1_PC.h"
 #include "1_Instruction_Memory.h"
 
@@ -44,10 +44,10 @@ int sc_main(int argc, char *argv[])
 
     //Instruction Fetch modules:
 
-    Mux5 mux5_a("mux5");
-    Adder adder_1("adder_1");
+    Mux1 mux1("mux1");
+    Adder1 adder_1("adder_1");
     PC pc("pc");
-    InstructionMemory instruction_memory("instruction memory");
+    InstructionMemory instruction_memory("instruction_memory");
 
 
     //Instruction Fetch signals:
@@ -57,10 +57,10 @@ int sc_main(int argc, char *argv[])
 
     //Connecting the signals to the ports:
 
-    mux5_a.aIn(Adder_2MuxOutSg);
-    mux5_a.bIn(Adder_1MuxOutSg);
-    mux5_a.sIn(muxPcSg);
-    mux.cOut(PCAddressOutSg);
+    mux1.aIn(Adder_2MuxOutSg);
+    mux1.bIn(Adder_1MuxOutSg);
+    mux1.sIn(muxPcSg);
+    mux1.cOut(PCAddressOutSg);
 
     pc.adressIn(PCAddressOutSg);
     pc.HazardIn(pcwriteSg);
@@ -72,8 +72,7 @@ int sc_main(int argc, char *argv[])
     instruction_memory.operationOut(InsMemOperationOutSg);
     
     adder_1.aIn(PCAddressAdderOutSg);
-    //adder_1.bIn(); This is always a number (4)
-    adder.resultOut(Adder_1MuxOutSg);
+    adder_1.resultOut(Adder_1MuxOutSg);
 
 //==============================================================================================
 
