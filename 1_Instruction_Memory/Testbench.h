@@ -17,8 +17,7 @@ private:
 	sc_uint<5> opCode, rs1, rs2, rd;
 	sc_int<17> imm;
 
-	void
-	print();
+	void print();
 	void test();
 };
 

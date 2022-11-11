@@ -11,7 +11,7 @@ Testbench::Testbench(sc_module_name TB_InstructionMemory) : sc_module(TB_Instruc
 
 void Testbench::test(){
 	wait();
-	std::cout << "Time     opCode      rs1       rs2       rd        imm\n";
+	std::cout << "Time     OpCode      rs1       rs2       rd        imm\n";
 	std::cout << "--------------------------------------------------------\n";
 
 	// Si Instruction Memory es sensible a la entrada, la lectura de la linea 0 no la detecta, si no que es la lectura por defecto al principio del programa. Por esto, basta con colocar un wait ac� y ya tendremos la lectura de la primera l�nea. En este caso, el for empezar�a a partir de 1 (0 ya lo ley�)
