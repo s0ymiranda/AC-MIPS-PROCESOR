@@ -1,0 +1,10 @@
+{
+    "C_Cpp.default.compilerPath": "",
+    "C_Cpp.default.includePath": [
+        "/usr/local/systemc-2.3.3/include"
+    ],
+    "files.associations": {
+        "systemc": "cpp",
+        "iostream": "cpp"
+    }
+}

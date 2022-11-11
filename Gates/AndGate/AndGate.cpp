@@ -1,11 +1,11 @@
 #include "AndGate.h"
 
-
-AndGate::AndGate(sc_module_name mn) : sc_module(mn) {
-  SC_METHOD(operation);
+AndGate::AndGate(sc_module_name moduleName) : sc_module(moduleName), aIn("aIn"), bIn("bIn"), cOut("cOut") {
+  SC_METHOD(process);
+  dont_initialize();
   sensitive << aIn << bIn;
 }
 
-void AndGate::operation() {
+void AndGate::process() {
   cOut.write(aIn.read() and bIn.read());
 }

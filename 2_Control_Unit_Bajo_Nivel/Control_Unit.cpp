@@ -1,15 +1,7 @@
 #include "Control_Unit.h"
 
-Control_Unit::Control_Unit(sc_module_name nm) : sc_module(nm)
+Control_Unit::Control_Unit(sc_module_name nm) : sc_module(nm) , InstrucIn("InstrucIn")
 {
-/*
-	and5[0].aIn(aInSg[0]);
-	and5[0].bIn(bInSg[0]);
-	and5[0].cIn(cInSg[0]);
-	and5[0].dIn(dInSg[0]);
-	and5[0].eIn(eInSg[0]);
-	and5[0].fOut(fOutSg[0]);
-*/
 
 	for(int i = 0;  i < 17; i++){
 		and5[i].aIn(aInSg[i]);
@@ -27,6 +19,30 @@ Control_Unit::Control_Unit(sc_module_name nm) : sc_module(nm)
 		aux[i+3](dInSg[j]);
 		aux[i+4](eInSg[j]);
 	}
+
+
+
+	Divider = new divider("Divider");
+
+	Divider->InstrucIn(InstrucIn);
+	Divider->InstrucIn_0(insbSg0);
+	Divider->InstrucIn_1(insbSg1);
+	Divider->InstrucIn_2(insbSg2);
+	Divider->InstrucIn_3(insbSg3);
+	Divider->InstrucIn_4(insbSg4);
+
+	not_gate[0].aIn(insbSg0);
+	not_gate[0].bOut(notBOut[0]);
+	not_gate[1].aIn(insbSg1);
+	not_gate[1].bOut(notBOut[1]);
+	not_gate[2].aIn(insbSg2);
+	not_gate[2].bOut(notBOut[2]);
+	not_gate[3].aIn(insbSg3);
+	not_gate[3].bOut(notBOut[3]);
+	not_gate[4].aIn(insbSg4);
+	not_gate[4].bOut(notBOut[4]);
+
+
 
 	//Wb_MemtoRegOut [0-7], 9, 13-14
 
@@ -84,7 +100,9 @@ Control_Unit::Control_Unit(sc_module_name nm) : sc_module(nm)
 	Uno(bSg);
 
 	SC_METHOD(operation);
-	sensitive << clk << BranchConditionIn << InstrucIn;
+		sensitive << clk << BranchConditionIn << InstrucIn;
+		dont_initialize();
+
 }
 
 /*  0 add   - rd, rs1, rs2
@@ -118,7 +136,7 @@ void Control_Unit::operation()
 		muxPcsrOut.write(0);
 		IDIFflushOut.write(0);		
 	}
-	//reducido:
+	
 	if(InstrucIn.read() == 16 or InstrucIn.read() == 15 or InstrucIn.read() == 12 or InstrucIn.read() == 11 or InstrucIn.read() == 10){
 		Mem_MemWriteOut.write(0); 
         Mem_MemReadOut.write(0);
@@ -144,107 +162,109 @@ void Control_Unit::operation()
 	//mega agrupado:
 */
 
-	aux[0].write(!InstrucIn.read()[0]);
-	aux[1].write(!InstrucIn.read()[1]);
-	aux[2].write(!InstrucIn.read()[2]);
-	aux[3].write(!InstrucIn.read()[3]);
-	aux[4].write(!InstrucIn.read()[4]);
 
-	aux[5].write(InstrucIn.read()[0]);
-	aux[6].write(!InstrucIn.read()[1]);
-	aux[7].write(!InstrucIn.read()[2]);
-	aux[8].write(!InstrucIn.read()[3]);
-	aux[9].write(!InstrucIn.read()[4]);
 
-	aux[10].write(!InstrucIn.read()[0]);
-	aux[11].write(InstrucIn.read()[1]);
-	aux[12].write(!InstrucIn.read()[2]);
-	aux[13].write(!InstrucIn.read()[3]);
-	aux[14].write(!InstrucIn.read()[4]);
+	aux[0].write(notBOut[0]);
+	aux[1].write(notBOut[1]);
+	aux[2].write(notBOut[2]);
+	aux[3].write(notBOut[3]);
+	aux[4].write(notBOut[4]);
 
-	aux[15].write(InstrucIn.read()[0]);
-	aux[16].write(InstrucIn.read()[1]);
-	aux[17].write(!InstrucIn.read()[2]);
-	aux[18].write(!InstrucIn.read()[3]);
-	aux[19].write(!InstrucIn.read()[4]);
+	aux[5].write(insbSg0);
+	aux[6].write(notBOut[1]);
+	aux[7].write(notBOut[2]);
+	aux[8].write(notBOut[3]);
+	aux[9].write(notBOut[4]);
 
-	aux[20].write(!InstrucIn.read()[0]);
-	aux[21].write(!InstrucIn.read()[1]);
-	aux[22].write(InstrucIn.read()[2]);
-	aux[23].write(!InstrucIn.read()[3]);
-	aux[24].write(!InstrucIn.read()[4]);
+	aux[10].write(notBOut[0]);
+	aux[11].write(insbSg1);
+	aux[12].write(notBOut[2]);
+	aux[13].write(notBOut[3]);
+	aux[14].write(notBOut[4]);
 
-	aux[25].write(InstrucIn.read()[0]);
-	aux[26].write(!InstrucIn.read()[1]);
-	aux[27].write(InstrucIn.read()[2]);
-	aux[28].write(!InstrucIn.read()[3]);
-	aux[29].write(!InstrucIn.read()[4]);
+	aux[15].write(insbSg0);
+	aux[16].write(insbSg1);
+	aux[17].write(notBOut[2]);
+	aux[18].write(notBOut[3]);
+	aux[19].write(notBOut[4]);
 
-	aux[30].write(!InstrucIn.read()[0]);
-	aux[31].write(InstrucIn.read()[1]);
-	aux[32].write(InstrucIn.read()[2]);
-	aux[33].write(!InstrucIn.read()[3]);
-	aux[34].write(!InstrucIn.read()[4]);
+	aux[20].write(notBOut[0]);
+	aux[21].write(notBOut[1]);
+	aux[22].write(insbSg2);
+	aux[23].write(notBOut[3]);
+	aux[24].write(notBOut[4]);
 
-	aux[35].write(InstrucIn.read()[0]);
-	aux[36].write(InstrucIn.read()[1]);
-	aux[37].write(InstrucIn.read()[2]);
-	aux[38].write(!InstrucIn.read()[3]);
-	aux[39].write(!InstrucIn.read()[4]);
+	aux[25].write(insbSg0);
+	aux[26].write(notBOut[1]);
+	aux[27].write(insbSg2);
+	aux[28].write(notBOut[3]);
+	aux[29].write(notBOut[4]);
 
-	aux[40].write(!InstrucIn.read()[0]);
-	aux[41].write(!InstrucIn.read()[1]);
-	aux[42].write(!InstrucIn.read()[2]);
-	aux[43].write(InstrucIn.read()[3]);
-	aux[44].write(!InstrucIn.read()[4]);
+	aux[30].write(notBOut[0]);
+	aux[31].write(insbSg1);
+	aux[32].write(insbSg2);
+	aux[33].write(notBOut[3]);
+	aux[34].write(notBOut[4]);
 
-	aux[45].write(InstrucIn.read()[0]);
-	aux[46].write(!InstrucIn.read()[1]);
-	aux[47].write(!InstrucIn.read()[2]);
-	aux[48].write(InstrucIn.read()[3]);
-	aux[49].write(!InstrucIn.read()[4]);
+	aux[35].write(insbSg0);
+	aux[36].write(insbSg1);
+	aux[37].write(insbSg2);
+	aux[38].write(notBOut[3]);
+	aux[39].write(notBOut[4]);
 
-	aux[50].write(!InstrucIn.read()[0]);
-	aux[51].write(InstrucIn.read()[1]);
-	aux[52].write(!InstrucIn.read()[2]);
-	aux[53].write(InstrucIn.read()[3]);
-	aux[54].write(!InstrucIn.read()[4]);
+	aux[40].write(notBOut[0]);
+	aux[41].write(notBOut[1]);
+	aux[42].write(notBOut[2]);
+	aux[43].write(insbSg3);
+	aux[44].write(notBOut[4]);
 
-	aux[55].write(InstrucIn.read()[0]);
-	aux[56].write(InstrucIn.read()[1]);
-	aux[57].write(!InstrucIn.read()[2]);
-	aux[58].write(InstrucIn.read()[3]);
-	aux[59].write(!InstrucIn.read()[4]);
+	aux[45].write(insbSg0);
+	aux[46].write(notBOut[1]);
+	aux[47].write(notBOut[2]);
+	aux[48].write(insbSg3);
+	aux[49].write(notBOut[4]);
 
-	aux[60].write(!InstrucIn.read()[0]);
-	aux[61].write(!InstrucIn.read()[1]);
-	aux[62].write(InstrucIn.read()[2]);
-	aux[63].write(InstrucIn.read()[3]);
-	aux[64].write(!InstrucIn.read()[4]);
+	aux[50].write(notBOut[0]);
+	aux[51].write(insbSg1);
+	aux[52].write(notBOut[2]);
+	aux[53].write(insbSg3);
+	aux[54].write(notBOut[4]);
 
-	aux[65].write(InstrucIn.read()[0]);
-	aux[66].write(!InstrucIn.read()[1]);
-	aux[67].write(InstrucIn.read()[2]);
-	aux[68].write(InstrucIn.read()[3]);
-	aux[69].write(!InstrucIn.read()[4]);
+	aux[55].write(insbSg0);
+	aux[56].write(insbSg1);
+	aux[57].write(notBOut[2]);
+	aux[58].write(insbSg3);
+	aux[59].write(notBOut[4]);
 
-	aux[70].write(!InstrucIn.read()[0]);
-	aux[71].write(InstrucIn.read()[1]);
-	aux[72].write(InstrucIn.read()[2]);
-	aux[73].write(InstrucIn.read()[3]);
-	aux[74].write(!InstrucIn.read()[4]);
+	aux[60].write(notBOut[0]);
+	aux[61].write(notBOut[1]);
+	aux[62].write(insbSg2);
+	aux[63].write(insbSg3);
+	aux[64].write(notBOut[4]);
 
-	aux[75].write(InstrucIn.read()[0]);
-	aux[76].write(InstrucIn.read()[1]);
-	aux[77].write(InstrucIn.read()[2]);
-	aux[78].write(InstrucIn.read()[3]);
-	aux[79].write(!InstrucIn.read()[4]);
+	aux[65].write(insbSg0);
+	aux[66].write(notBOut[1]);
+	aux[67].write(insbSg2);
+	aux[68].write(insbSg3);
+	aux[69].write(notBOut[4]);
 
-	aux[80].write(!InstrucIn.read()[0]);
-	aux[81].write(!InstrucIn.read()[1]);
-	aux[82].write(!InstrucIn.read()[2]);
-	aux[83].write(!InstrucIn.read()[3]);
-	aux[84].write(InstrucIn.read()[4]);
+	aux[70].write(notBOut[0]);
+	aux[71].write(insbSg1);
+	aux[72].write(insbSg2);
+	aux[73].write(insbSg3);
+	aux[74].write(notBOut[4]);
+
+	aux[75].write(insbSg0);
+	aux[76].write(insbSg1);
+	aux[77].write(insbSg2);
+	aux[78].write(insbSg3);
+	aux[79].write(notBOut[4]);
+
+	aux[80].write(notBOut[0]);
+	aux[81].write(notBOut[1]);
+	aux[82].write(notBOut[2]);
+	aux[83].write(notBOut[3]);
+	aux[84].write(insbSg4);
 
 	BranchC.write(BranchConditionIn.read());
 	Uno.write(1);
@@ -259,16 +279,7 @@ void Control_Unit::operation()
 
 	Ex_ALUOut.write(InstrucIn.read());
 
-//	bool b0 = InstrucIn.read()[0];
-//	bool b1 = InstrucIn.read()[1];
-//	bool b2 = InstrucIn.read()[2];
-//	bool b3 = InstrucIn.read()[3];
-//	bool b4 = InstrucIn.read()[4];
-//	Ex_ALUOut[0]->write(b0);
-//	Ex_ALUOut[1]->write(b1);
-//	Ex_ALUOut[2]->write(b2);
-//	Ex_ALUOut[3]->write(b3);
-//	Ex_ALUOut[4]->write(b4);
+
 
 
 }

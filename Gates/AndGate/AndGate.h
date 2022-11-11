@@ -1,18 +1,18 @@
-#ifndef ANDGATE_H
-#define ANDGATE_H
+#ifndef AND_GATE_H
+#define AND_GATE_H
 
 #include <systemc.h>
 
-
 class AndGate : public sc_module {
-public:
-  sc_in<bool> aIn, bIn;
-  sc_out<bool> cOut;
+  public:
+    sc_in<bool> aIn, bIn;
+    sc_out<bool> cOut;
 
-  SC_CTOR(AndGate);
+    SC_CTOR(AndGate);
+    
+  private:
+    void process();
 
-private:
-  void operation();
 };
 
-#endif
+#endif // AND_GATE_H

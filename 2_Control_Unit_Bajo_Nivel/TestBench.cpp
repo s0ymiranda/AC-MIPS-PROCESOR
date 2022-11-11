@@ -27,10 +27,12 @@ void TestBench::test() {
     InstrucOut.write(10);
     wait();
     wait();
+    wait();
     print();
 
     BranchConditionOut.write(0);
     InstrucOut.write(0);
+    wait();
     wait();
     wait();
     print();
@@ -39,16 +41,19 @@ void TestBench::test() {
     InstrucOut.write(14);
     wait();
     wait();
+    wait();
     print();
   
     BranchConditionOut.write(1);
     InstrucOut.write(2);
     wait();
     wait();
+    wait();
     print();
 
     BranchConditionOut.write(0);
     InstrucOut.write(9);
+    wait();
     wait();
     wait();
     print();

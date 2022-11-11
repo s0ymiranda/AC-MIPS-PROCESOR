@@ -3,7 +3,7 @@
 id_ex::id_ex(sc_module_name nm) : sc_module(nm)
 {
 	SC_METHOD(process);
-	sensitive << clkIn.neg();
+	sensitive << clkIn.pos();
 	dont_initialize();
 }
 

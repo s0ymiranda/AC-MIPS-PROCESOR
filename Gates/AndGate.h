@@ -6,7 +6,6 @@
 
 class AndGate : public sc_module {
 public:
-
   sc_in<bool> aIn, bIn;
   sc_out<bool> cOut;
 

@@ -5,6 +5,8 @@
 #include "AndGate5.h"
 #include "AndGate.h"
 #include "OrGate.h"
+#include "NotGate.h"
+#include "Divider.h"
 
 class Control_Unit: public sc_module
 {
@@ -34,7 +36,13 @@ private:
 	sc_vector<OrGate> SC_NAMED(or_gate, 11);
 	sc_vector<sc_signal<bool>> SC_NAMED(orCOut, 11);
 
+	//sc_vector<NotGate> SC_NAMED(not_gate, 52);
 	//sc_vector<sc_signal<bool>> SC_NAMED(notBOut, 52);
+	sc_vector<NotGate> SC_NAMED(not_gate, 5);
+	sc_vector<sc_signal<bool>> SC_NAMED(notBOut, 5);
+	sc_signal<bool> insbSg0, insbSg1, insbSg2, insbSg3, insbSg4;
+	divider *Divider;
+	//sc_out<bool> insb0, insb1, insb2, insb3, insb4;
 
 	AndGate *and2;
 	sc_signal<bool> aSg, bSg, cSg;

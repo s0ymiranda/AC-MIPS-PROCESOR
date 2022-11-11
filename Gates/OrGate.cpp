@@ -1,11 +1,11 @@
 #include "OrGate.h"
 
-OrGate::OrGate(sc_module_name moduleName) : sc_module(moduleName), aIn("aIn"), bIn("bIn"), cOut("cOut") {
-  SC_METHOD(process);
-  dont_initialize();
+
+OrGate::OrGate(sc_module_name mn) : sc_module(mn) {
+  SC_METHOD(operation);
   sensitive << aIn << bIn;
 }
 
-void OrGate::process() {
+void OrGate::operation() {
   cOut.write(aIn.read() or bIn.read());
 }

@@ -1,18 +1,18 @@
-#ifndef OR_GATE_H
-#define OR_GATE_H
+#ifndef ORGATE_H
+#define ORGATE_H
 
 #include <systemc.h>
 
+
 class OrGate : public sc_module {
-  public:
-    sc_in<bool> aIn, bIn;
-    sc_out<bool> cOut;
+public:
+  sc_in<bool> aIn, bIn;
+  sc_out<bool> cOut;
 
-    SC_CTOR(OrGate);
-  
-  private:
-    void process();
+  SC_CTOR(OrGate);
 
+private:
+  void operation();
 };
 
-#endif // AND_GATE_H
+#endif
