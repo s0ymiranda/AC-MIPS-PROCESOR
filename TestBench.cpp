@@ -7,7 +7,7 @@ TestBench :: TestBench(sc_module_name mn) : sc_module(mn) {
   dont_initialize();
 }
 
-#include "0_Testbench.h"
+#include "Testbench.h"
 #include <iomanip>
 
 
@@ -32,36 +32,40 @@ void Testbench::print()
 	std::cout << "====================CAMINO DE DATOS===================\n";
 	std::cout << "Modulo: INSTRUCTION MEMORY-----------\n";
 
-	sc_uint<4> instruction;
-	sc_uint<5> operand1, operand2;
-	sc_int<18> operand3;
-	for (int i = 0; i < 4; i++)
-		instruction[i] = operationOut.read()[i];
+	sc_uint<5> opCode, rs1, rs2, rd;
+	sc_int<17> imm;
 
-	if (instruction == 3 or instruction == 6 or instruction == 7 or instruction == 12 or instruction == 13 or instruction == 8 or instruction == 9 or instruction == 14 or instruction == 15)
-	{
+	std::cout << "Time     OpCode      rs1       rs2       rd        imm\n";
+	std::cout << "--------------------------------------------------------\n";
 
-		for (sc_uint<4> i = 4, j = 0; i < 9; i++, j++)
-			operand1[j] = operationOut.read()[i];
+	for (int i = 1; i < 10; i++){
+		instructionNumberIn.write(i);
+		wait();
+		wait();
 
-		for (sc_uint<4> i = 9, j = 0; i < 14; i++, j++)
-			operand2[j] = operationOut.read()[i];
+	for (sc_uint<5> i = 0; i < 5; i++){
+		opCode[i] = operationIn.read()[i];
+		}
 
-		for (sc_uint<6> i = 14, j = 0; i < 32; i++, j++)
-			operand3[j] = operationOut.read()[i];
-	}
-	else
-	{
-		for (sc_uint<4> i = 4, j = 0; i < 9; i++, j++)
-			operand1[j] = operationOut.read()[i];
-
-		for (sc_uint<4> i = 9, j = 0; i < 14; i++, j++)
-			operand2[j] = operationOut.read()[i];
-
-		for (sc_uint<5> i = 14, j = 0; i < 19; i++, j++)
-			operand3[j] = operationOut.read()[i];
+	for (sc_uint<5> i = 5, j = 0; i < 10; i++, j++){
+		rs1[j] = operationIn.read()[i];
 	}
 
+	for (sc_uint<6> i = 10, j = 0; i < 15; i++, j++){
+		rs2[j] = operationIn.read()[i];
+	}
+
+	for (sc_uint<6> i = 15, j = 0; i < 20; i++, j++){
+		rd[j] = operationIn.read()[i];
+		}
+
+		for (sc_uint<6> i = 20, j = 0; i < 32; i++, j++){
+			imm[j] = operationIn.read()[i];
+		}
+	}
+
+
+	
 	std::cout << " Time    operand1    operand2    operand3    instruction\n";
 	std::cout << "--------------------------------------------------------\n";
 	
