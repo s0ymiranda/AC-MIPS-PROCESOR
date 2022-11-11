@@ -10,7 +10,7 @@ Hazard_Detection_Unit::Hazard_Detection_Unit(sc_module_name moduleName) : sc_mod
 void Hazard_Detection_Unit::operation()
 {
 	
-    if (IDEXInstrucIn.read() == 9 and (IDEXrdIn.read() == rs1In.read() or IDEXrdIn.read() == rs2In.read() )){
+    if (IDEXInstrucIn.read() == 8 and (IDEXrdIn.read() == rs1In.read() or IDEXrdIn.read() == rs2In.read() )){
         pcwriteOut.write(0);
         IFIDwriteOut.write(0);
         muxControlOut.write(0);

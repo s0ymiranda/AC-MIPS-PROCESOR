@@ -23,14 +23,14 @@ void TestBench::test(){
         wait();
 		print();
 
-        IDEXInstrucOut.write(9);
+        IDEXInstrucOut.write(8);
 		rs1Out.write(10);         //valores de prueba 
 		rs2Out.write(2);
         IDEXrdOut.write(7);
         wait();
 		print();
 
-    	IDEXInstrucOut.write(9);
+    	IDEXInstrucOut.write(8);
 		rs1Out.write(10);         //valores de prueba 
 		rs2Out.write(2);
         IDEXrdOut.write(2);
