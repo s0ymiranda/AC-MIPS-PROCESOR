@@ -1,5 +1,5 @@
-#ifndef ADDER_H
-#define ADDER_H
+#ifndef ADDER2_H
+#define ADDER2_H
 
 #include <systemc.h>
 
