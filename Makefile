@@ -4,7 +4,7 @@
 # Versión de SYSTEMC
 	VERSION = systemc-2.3.3
 # Especifique los archivos .cpp
-	SRCS = PC.cpp Instruction_Memory.cpp Adder.cpp Branch_Condition.cpp Hazard_Detection_Unit.cpp IF_ID.cpp RegisterFile.cpp ImmGen.cpp ALU.cpp FORWARDING_UNIT.cpp MUX_3.cpp ID_EX.cpp 5_Mux.cpp MEM_WB.cpp EX_MEM.cpp Data_Memory.cpp main.cpp
+	SRCS = 1_Adder.cpp 1_mux.cpp 1_PC.cpp 1_Instruction_Memory.cpp 2_Adder.cpp 2_Branch_Condition.cpp 2_Hazard_Detection_Unit.cpp 2_IF_ID.cpp 2_RegisterFile.cpp 2_ImmGen.cpp 3_ALU.cpp 3_FORWARDING_UNIT.cpp 3_MUX_3.cpp 3_ID_EX.cpp 5_Mux.cpp 5_MEM_WB.cpp 4_EX_MEM.cpp 4_Data_Memory.cpp main.cpp 2_Control_Unit.cpp OrGate.cpp AndGate.cpp AnGate5.cpp
 
 
 # Nombre del ejecutable
