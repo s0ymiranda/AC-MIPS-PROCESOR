@@ -1,16 +1,18 @@
-#include "Instruction_Memory.h"
+#include "1_Instruction_Memory.h"
 
-InstructionMemory::InstructionMemory(sc_module_name Instruction_Memory) : sc_module(Instruction_Memory), instructionNumberIn("instructonNumberIn"), operationOut("operationOut"){
+InstructionMemory::InstructionMemory(sc_module_name moduleName) : sc_module(moduleName), instructionNumberIn("instructonNumberIn"), operationOut("operationOut"){
 
   ifstream instructionFile("program.txt", ios::in);
+   //instructionFile.fail
 	 	if (instructionFile.fail())
 		exit(EXIT_FAILURE);
 
   numOfInstructions = 0;
-  std::string line;
+  std::string line; //line
 
-  while (!instructionFile.eof()) { 
-    getline(instructionFile, line); 
+  while (!instructionFile.eof()) { //!instructionFile.eof() instructionFile.eof() != true
+    getline(instructionFile, line);
+    //if(instruction != '\n') 
 		numOfInstructions++;
   }
 
@@ -54,10 +56,13 @@ void InstructionMemory::list (std::string instruction){
   15 jal
   16 jalr
   */
+
   /*
-	organizacion de los 32 bits de operand (salida)
-	|0 - 4 | 5 - 9 | 10 - 14 | 15 - 19 | 20 - 31|
-   OpCode   rs1      rs2       rd       imm
+  Bits 0 - 4, tipo de instruccion 
+	Bits 5 - 9, primer registro rs1
+	Bits 10 - 14, segundo registro rs2
+	Bits 15 - 19, tercer registro rd
+  Bits 20 - 31, Valor inmediato u offset
   */
 
  	std::string aux = instruction.substr(0, instruction.find_first_of(' '));
@@ -71,21 +76,55 @@ void InstructionMemory::list (std::string instruction){
 
   if(aux == "add" or aux == "sub" or aux == "sll" or aux == "slt" or aux == "or" or aux == "and"){
   /*
-	|0 - 4 | 5 - 9 | 10 - 14 | 15 - 19 | 20 - 31|
-  |OpCode|  rs1  |   rs2   |   rd    |    0   |
+  Bits 0 - 4, tipo de instruccion 
+	Bits 5 - 9, primer registro rs1
+	Bits 10 - 14, segundo registro rs2
+	Bits 15 - 19, tercer registro rd
+  Bits 20 - 31, 0
   */
 
   std::string aux2(instruction.substr(instruction.find_first_of('x') + 1));
 		sc_int<32> rd = stoi(aux2); //rd 
-		registerValidation(rd);
+		//registerValidation(dir01);
 		std::string aux3(aux2.substr(aux2.find_first_of(',') + 3));
-		cout<<aux3<<endl;
+		//cout<<aux3<<endl;
 		sc_int<32> rs1 = stoi(aux3); //rs1
-		registerValidation(rs1);
+		//registerValidation(dir02);
 		std::string aux4(aux3.substr(aux3.find_first_of(',') + 3));
 		sc_int<32> rs2 = stoi(aux4); //rs2
-		registerValidation(rs2);
+		//registerValidation(dir03);
 
+/*
+	for(int i = 0; i < 32; i++){
+		std::cout << operand[i];
+	}
+	cout<<endl<<"dir1: "<<"="<<dir01<<endl;
+	
+	for(int i = 0; i < 5; i++){
+		std::cout << dir01[i];
+	}
+cout<<endl<<"dir2: "<<"="<<dir02<<endl;
+		for(int i = 0; i < 32; i++){
+		std::cout << dir02[i];
+	}
+cout<<endl<<"dir3: "<<"="<<dir03<<endl;
+		for(int i = 0; i < 5; i++){
+		std::cout << dir03[i];
+	}
+	cout<<endl;
+ 
+		operand <<= 5;
+		
+	for(int i = 0; i < 32; i++){
+		std::cout << operand[i];
+	}
+	cout<<endl;
+
+		for(int i = 0; i < 32; i++){
+		std::cout << operand[i];
+	}
+	cout<<endl;
+	*/
 		operand += rd;
 		operand <<= 5;
 		operand += rs2;
@@ -109,61 +148,61 @@ void InstructionMemory::list (std::string instruction){
 		operationOut.write(operand);
   }
 
-	else if (aux == "addi" or aux == "slli" or aux == "ori" or aux == "slti"){
-		/*
-		|0 - 4 | 5 - 9 | 10 - 14 | 15 - 19 | 20 - 31|
-		|OpCode|  rs1  |    0    |   rd    |  imm   |
-		*/
+	else if (aux == "addi" or aux == "slli" or aux == "ori" or aux == "slti"){ //slti
+  /*
+  Bits 0 - 4, tipo de instruccion 
+	Bits 5 - 9, primer registro rs1
+	Bits 10 - 14, 0
+	Bits 15 - 19, registro rd
+  Bits 20 - 31, Valor inmediato o shamt
+  */
 
-		std::string aux2(instruction.substr(instruction.find_first_of('x') + 1));
-		sc_int<32> rd = stoi(aux2);
-		registerValidation(rd);
-		std::string aux3(aux2.substr(aux2.find_first_of(',') + 3));
-		sc_int<32> rs1 = stoi(aux3);
-		registerValidation(rs1);
-		std::string aux4(aux3.substr(aux3.find_first_of(',') + 2));
-		sc_int<32> imm = stoi(aux4);
-		immValidation(imm);
+	std::string aux2(instruction.substr(instruction.find_first_of('x') + 1));
+	sc_int<32> rd = stoi(aux2);
+	registerValidation(rd);
+	std::string aux3(aux2.substr(aux2.find_first_of(',') + 3));
+	sc_int<32> rs1 = stoi(aux3);
+	registerValidation(rs1);
+	std::string aux4(aux3.substr(aux3.find_first_of(',') + 2));
+	sc_int<32> imm = stoi(aux4);
+	immValidation(imm);
 
-		operand += imm;
-		operand <<= 5;
-		operand += rd;
-		operand <<= 10; // corremos 10 espacios porque rs2 es 0
-		operand += rs1;
-		operand <<= 5;
+	operand += imm;
 
-		if (aux == "addi")
-			opCode = 1;
-		else if (aux == "slli")
-			opCode = 4;
-		else if (aux == "ori")
-			opCode = 6;
-		else if (aux == "slti")
-			opCode = 14;
+	operand <<= 5;
+	operand += rd;
+	operand <<= 10; //porque rs2 es 0
+	operand += rs1;
+	operand <<= 5;
 
-		operand += opCode;
-		operationOut.write(operand);
-	}
+	if (aux == "addi")
+		opCode = 1;
+	else if (aux == "slli")
+		opCode = 4;
+	else if (aux == "ori")
+		opCode = 6;
+	else if (aux == "slti")
+		opCode = 14;
+
+	operand += opCode;
+	operationOut.write(operand);
+}
 
 	else if (aux == "lw" or aux == "sw"){
-		/*
-		|0 - 4 | 5 - 9 | 10 - 14 | 15 - 19 | 20 - 31|
-		|OpCode|  rs1  |   0     |   rd    |  imm   |
-		*/
 		std::string aux2(instruction.substr(instruction.find_first_of('x') + 1));
 		sc_int<32> rd = stoi(aux2);
 		registerValidation(rd);
 		std::string aux3(aux2.substr(aux2.find_first_of(',') + 2));
 		sc_int<32> offset = stoi(aux3);
-		immValidation(offset);
 		std::string aux4(aux3.substr(aux3.find_first_of('x') + 1));
+		immValidation(offset);
 		sc_int<32> rs1 = stoi(aux4);
 		registerValidation (rs1);
 
 		operand += offset;
 		operand <<= 5;
 		operand += rd;
-		operand <<= 10; // corremos 10 espacios rs2 es 0
+		operand <<= 10;
 		operand += rs1;
 		operand <<= 5;
 		if (aux == "lw")
@@ -174,11 +213,7 @@ void InstructionMemory::list (std::string instruction){
 		operationOut.write(operand);
 	}
 
-	else if (aux == "beq" or aux == "bne" or aux == "blt"){ 
-		/*
-		|0 - 4 | 5 - 9 | 10 - 14 | 15 - 19 | 20 - 31|
-		|OpCode|  rs1  |   rs2   |    0    |  linea |
-		*/
+	else if (aux == "beq" or aux == "bne" or aux == "blt"){ //blt
 		std::string aux2(instruction.substr(instruction.find_first_of('x') + 1));
 		sc_int<32> rs1 = stoi(aux2);
 		registerValidation(rs1);
@@ -211,9 +246,14 @@ void InstructionMemory::list (std::string instruction){
 			std::cout << "\n\nNo existe la etiqueta de salto " << err << " en el código especificado.\n\n";
 			sc_stop();
 		}
+		/*
+		for (sc_uint<5> i = 0; i < 18; i++){
+			operand[i] = linea[i];
+		}
+		*/
 		
     operand += linea;
-		operand <<= 10; // corremos 10 espacios porque rd es 0
+		operand <<= 10;
 		operand += rs2;
 		operand <<= 5;
 		operand += rs1;
@@ -231,46 +271,13 @@ void InstructionMemory::list (std::string instruction){
 	}
 
 	else if(aux == "jal"){
-		/*
-		|0 - 4 | 5 - 9 | 10 - 14 | 15 - 19 | 20 - 31|
-		|OpCode|   0   |    0    |   rd    | offset |
-		*/
-		std::string aux2(instruction.substr(instruction.find_first_of('x') + 1));
-		sc_int<32> rd = stoi(aux2);
-		registerValidation(rd);
-		sc_int<32> offset = instructionNumberIn.read();
+
 		
-		operand += offset;
-    operand <<= 5;
-		operand += rd;
-		operand <<= 15; // corremos 15 espacios rs2 y rs1 es 0
-		operand += 15;
-    operationOut.write(operand);
 	}
 
 	else if(aux == "jalr"){
-		/*
-		|0 - 4 | 5 - 9 | 10 - 14 | 15 - 19 | 20 - 31|
-		|OpCode|  rs1  |    0    |   rd    | offset |
-		*/
-		std::string aux2(instruction.substr(instruction.find_first_of('x') + 1));
-		sc_int<32> rd = stoi(aux2);
-		registerValidation(rd);
-		std::string aux3(aux2.substr(aux2.find_first_of(',') + 2));
-		sc_int<32> offset = stoi(aux3);
-		immValidation(offset);
-		std::string aux4(aux3.substr(aux3.find_first_of('x') + 1));
-		sc_int<32> rs1 = stoi(aux4);
-		registerValidation (rs1);
+	
 
-		operand += offset;
-		operand <<= 5;
-    operand += rd;
-		operand <<= 10; // corremos 10 espacios porque rs2 es 0
-    operand += rs1;
-		operand <<= 5;
-		operand += 16; //el OpCode de jalr es 16
-		operationOut.write(operand);
 	}
 }
 

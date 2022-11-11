@@ -12,7 +12,15 @@ void Testbench::test(){
 	std::cout << "   Time    adressAdderIn    adressPC_IF_IDIn    adressInstructionMemoryIn\n";
 	std::cout << "-------------------------------------------------------------------------\n";
 
-	for (int i = 1; i < 101; i++){
+	for (int i = 1; i <50; i++){
+		HazardOut.write(1);
+		adressOut.write(i);
+		wait();
+		wait();
+		print();
+	}
+	for (int i = 1; i <50; i++){
+		HazardOut.write(0);
 		adressOut.write(i);
 		wait();
 		wait();
