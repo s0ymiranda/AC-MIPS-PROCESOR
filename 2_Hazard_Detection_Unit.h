@@ -1,5 +1,5 @@
-#ifndef HAZARD_DETECTION_UNIT_H
-#define HAZARD_DETECTION_UNIT_H
+#ifndef HAZARD_H
+#define HAZARD_H
 
 #include <systemc.h>
 
