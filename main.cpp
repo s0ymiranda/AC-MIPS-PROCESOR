@@ -49,15 +49,15 @@ int sc_main(int argc, char *argv[])
     PC pc("pc");
     InstructionMemory instruction_memory("instruction_memory");
 
-
     //Instruction Fetch signals:
 
-    sc_signal<sc_int<32>> PCAddressOutSg, PCAddressIF_IDOutSg, PCAddressInsMemOutSg, PCAddressAdderOutSg, Adder_1MuxOutSg;
-    sc_signal<sc_uint<32>> InsMemOperationOutSg;
+    sc_signal<bool> muxPcSg;
+    sc_signal<sc_int<32>> PCAddressOutSg, PCAddressIF_IDOutSg, PCAddressAdderOutSg, Adder_1MuxOutSg;
+    sc_signal<sc_uint<32>> InsMemOperationOutSg, PCAddressInsMemOutSg;
 
     //Connecting the signals to the ports:
 
-    mux1.aIn(Adder_2MuxOutSg);
+    mux1.aIn(Adder_1MuxOutSg);
     mux1.bIn(Adder_1MuxOutSg);
     mux1.sIn(muxPcSg);
     mux1.cOut(PCAddressOutSg);
@@ -88,7 +88,7 @@ int sc_main(int argc, char *argv[])
 
     //Instruction Decode signals:
 
-    sc_signal<bool> hazzardSg, resultbranchOutSg, FlushSg, muxPcSg, MemWriteSg, MemReadSg, WbtoRegSg, WbWriteSg, muxControlSg, IFIDwriteSg, pcwriteSg ;
+    sc_signal<bool> hazzardSg, resultbranchOutSg, FlushSg, MemWriteSg, MemReadSg, WbtoRegSg, WbWriteSg, muxControlSg, IFIDwriteSg, pcwriteSg ;
     sc_signal<sc_int<32>> ID_EXAdderOutSg, RegisterFileID_EXrs1OutSg, RegisterFileID_EXrs2OutSg, ImmGenID_EXOutSg, ImmGenAdderOutSg, Adder_2MuxOutSg;
     sc_signal<sc_uint<5>> RegisterFile1OutSg, RegisterFile2OutSg, RegisterRs1OutSg, RegisterRs2OutSg, TargetRegisterOutSg, ALUInsOutSg;
     sc_signal<sc_int<12>> immGenOutSg;
@@ -119,7 +119,7 @@ int sc_main(int argc, char *argv[])
 
     register_file.rs1In(RegisterFile1OutSg);
     register_file.rs2In(RegisterFile2OutSg);
-    register_file.rIn(MuxRegisterFileOutSg);
+    register_file.rIn(MuxRegisterFile2OutSg);
     register_file.weIn(RegWrite4WbSg);
     register_file.rdIn(MEM_WBTargetRegisterOutSg);
     register_file.s1Out(RegisterFileID_EXrs1OutSg);
@@ -297,7 +297,7 @@ int sc_main(int argc, char *argv[])
 //==============================================================================================
 
     //Conecting all the modules to the clock signal:
-
+//hefnjenvejnefef
     pc.clk(clock);
     instruction_memory.clk(clock);
     if_id.clk(clock);
