@@ -7,6 +7,18 @@ class TestBench : public sc_module{
     //Senial de control 
     sc_in_clk clk;
 
+    //Instruction memory
+	sc_in<sc_int<32>> instructionNumberIn;
+	sc_in<sc_uint<32>> operationIn;
+
+    //RegisterFile
+    sc_in<sc_int<32>> s1In;     // Variable dentro del rs1
+    sc_in<sc_int<32>> s2In;     // Variable dentro del rs2
+    sc_in<sc_uint<5>> rdOut;      //register destination
+    sc_in<sc_uint<5>> rs1Out;     //register source 1
+    sc_in<sc_uint<5>> rs2Out;     //register source 2
+    sc_in<sc_int<32>> rOut;      //result
+
     //AlU
     sc_in<sc_int<32>> resultIn;
     sc_out<sc_int<32>> value_1Out, value_2Out;

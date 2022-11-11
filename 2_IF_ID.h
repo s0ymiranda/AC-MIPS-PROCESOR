@@ -1,5 +1,5 @@
-#ifndef IF_ID_H
-#define IF_ID_H
+#ifndef IFID_H
+#define IFID_H
 
 #include <systemc.h>
 

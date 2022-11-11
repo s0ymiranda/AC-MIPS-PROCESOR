@@ -1,5 +1,5 @@
-#ifndef 5_MUX_H
-#define 5_MUX_H
+#ifndef Mux_H
+#define Mux_H
 
 #include <systemc.h>
 
