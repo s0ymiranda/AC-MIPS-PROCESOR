@@ -78,7 +78,7 @@ int sc_main(int argc, char *argv[])
 
     //Instruction Decode modules:
 
-	IF_ID if_id("if_id");
+    IF_ID if_id("if_id");
     Adder adder_2("adder_2");
     Branch_Condition branch_condition("branch condition");
     Control_Unit control_unit("control unit");
